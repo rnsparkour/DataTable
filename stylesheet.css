@@ -16,6 +16,14 @@ th {
   color: #fff;
 }
 
+tbody tr {
+  transition: all 1s ease-in-out;
+}
+
+tbody tr.slide-out {
+  transform: translateX(100%);
+}
+
 tr {
   transition: all 1s ease-in-out;
 }
@@ -23,6 +31,7 @@ tr {
 tr.slide-out {
   transform: translateX(100%);
 }
+
 .win-row {
   background-color: #c8e6c9; /* Green background for wins */
 }

@@ -1,18 +1,5 @@
-const rows = Array.from(document.querySelectorAll('tr'));
 
-function slideOut(row) {
-  row.classList.add('slide-out');
-}
 
-function slideIn(row, index) {
-  setTimeout(function() {
-    row.classList.remove('slide-out');
-  }, (index + 5) * 200);  
-}
-
-rows.forEach(slideOut);
-
-rows.forEach(slideIn);
 
 //Add a Function to Save Data:
 function saveTableData() {
@@ -51,6 +38,8 @@ function updateStyling(row) {
       row.style.backgroundColor = '#ffcdd2'; // Red background for losses
     }
   }
+  
+
     // Save data to localStorage
   saveTableData();
   
@@ -106,6 +95,8 @@ function loadTableData() {
     for (var i = 0; i < tableData.length; i++) {
       var newRow = tableBody.insertRow(tableBody.rows.length);
 
+
+
       for (var j = 0; j < tableData[i].length; j++) {
         var newCell = newRow.insertCell(j);
         newCell.innerHTML = tableData[i][j];
@@ -115,17 +106,33 @@ function loadTableData() {
        newRow.addEventListener('focusout', function () {
         // Update the styling based on the result value
         updateStyling(newRow);
+        
       });
 
       // Update styling for the loaded row
       updateStyling(newRow);
-      
+    // Select only the 'tr' elements within 'tbody'
+const rows = Array.from(document.querySelectorAll('tr'));
+
+function slideOut(row) {
+  row.classList.add('slide-out');
+}
+
+function slideIn(row, index) {
+  setTimeout(function() {
+    row.classList.remove('slide-out');
+  }, (index + 5) * 200);
+}
+
+rows.forEach(slideOut);
+
+rows.forEach(slideIn);
     }
 
     // Enable editing after loading data
     enableEditing();
    
- 
+    
   }
 }
 
