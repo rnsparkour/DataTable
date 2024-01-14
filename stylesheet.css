@@ -1,24 +1,32 @@
 /* Add this in styles.css */
+
 table {
-  border-collapse: collapse;
-  width: 100%;
-  background-color: #f2f2f2;
+  overflow: hidden;
+  background-color: #eee;
 }
 
 th, td {
-  border: 1px solid #dddddd;
+  padding: 0.25em 0.5em;
   text-align: left;
-  padding: 8px;
+  vertical-align: top;
 }
 
 th {
-  background-color: #f2f2f2;
+  background-color: #009;
+  color: #fff;
 }
 
+tr {
+  transition: all 1s ease-in-out;
+}
+
+tr.slide-out {
+  transform: translateX(100%);
+}
 .win-row {
-background-color: #c8e6c9; /* Green background for wins */
+  background-color: #c8e6c9; /* Green background for wins */
 }
 
 .loss-row {
-background-color: #ffcdd2; /* Red background for losses */
+  background-color: #ffcdd2; /* Red background for losses */
 }

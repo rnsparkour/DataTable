@@ -1,3 +1,18 @@
+const rows = Array.from(document.querySelectorAll('tr'));
+
+function slideOut(row) {
+  row.classList.add('slide-out');
+}
+
+function slideIn(row, index) {
+  setTimeout(function() {
+    row.classList.remove('slide-out');
+  }, (index + 5) * 200);  
+}
+
+rows.forEach(slideOut);
+
+rows.forEach(slideIn);
 
 //Add a Function to Save Data:
 function saveTableData() {
@@ -38,8 +53,8 @@ function updateStyling(row) {
   }
     // Save data to localStorage
   saveTableData();
+  
 }
-
 
 // Function to add a new row to the table
 function addRow() {
@@ -57,6 +72,8 @@ function addRow() {
     // Update the styling based on the result value
     updateStyling(newRow);
   });
+  
+  
 }
 
 // Function to update the styling for existing rows
@@ -66,7 +83,9 @@ function updateStylingForExistingRows() {
   // Loop through existing rows and update styling
   for (var i = 0; i < tableBody.rows.length; i++) {
     updateStyling(tableBody.rows[i]);
+    
   }
+
 }
 
 // Call updateStylingForExistingRows after adding rows
@@ -74,6 +93,7 @@ updateStylingForExistingRows();
 
 // Function to load data from localStorage
 function loadTableData() {
+  
   var tableData = localStorage.getItem('tableData');
 
   if (tableData) {
@@ -91,16 +111,23 @@ function loadTableData() {
         newCell.innerHTML = tableData[i][j];
         newCell.contentEditable = true; // Make the cell editable
       }
+       // Enable focusout event listener for styling updates
+       newRow.addEventListener('focusout', function () {
+        // Update the styling based on the result value
+        updateStyling(newRow);
+      });
 
       // Update styling for the loaded row
       updateStyling(newRow);
+      
     }
 
     // Enable editing after loading data
     enableEditing();
+   
+ 
   }
 }
-
 
 
 // Call loadTableData on page load
