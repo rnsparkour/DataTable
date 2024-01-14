@@ -1,23 +1,15 @@
-// Function to enable editing of table cells
-function enableEditing() {
-  var table = document.getElementById('resultsTable');
+// Function to update the styling based on the result value
+function updateStyling(row) {
+  var resultValue = row.cells[3].innerText.trim().toLowerCase(); // Convert to lowercase
 
-  table.addEventListener('mouseover', function(e) {
-    var cell = e.target;
-
-    // Check if the cell is within the tbody
-    if (cell.tagName === 'TD') {
-      // Make the cell editable
-      cell.contentEditable = true;
-
-      // Add a focus event listener to track changes
-      cell.addEventListener('focusout', function() {
-        // Update the cell value when focus is lost
-        cell.contentEditable = false;
-      });
-    }
-  });
+  // Update row color based on the result value
+  if (resultValue === 'w') {
+    row.style.backgroundColor = '#c8e6c9'; // Green background for wins
+  } else if (resultValue === 'l') {
+    row.style.backgroundColor = '#ffcdd2'; // Red background for losses
+  }
 }
+
 
 // Function to add a new row to the table
 function addRow() {
@@ -27,19 +19,25 @@ function addRow() {
   for (let i = 0; i < 4; i++) {
     var newCell = newRow.insertCell(i);
     newCell.innerHTML = ''; // Initially, set the content to an empty string
+    newCell.contentEditable = true; // Make the cell editable
   }
 
-  // Enable editing for the newly added row
-  enableEditing();
+  // Enable focusout event listener for styling updates
+  newRow.addEventListener('focusout', function () {
+    // Update the styling based on the result value
+    updateStyling(newRow);
+  });
 }
 
-// Function to remove the last row from the table
-function removeRow() {
+// Function to update the styling for existing rows
+function updateStylingForExistingRows() {
   var tableBody = document.getElementById('tableBody');
-  if (tableBody.rows.length > 0) {
-    tableBody.deleteRow(tableBody.rows.length - 1);
+
+  // Loop through existing rows and update styling
+  for (var i = 0; i < tableBody.rows.length; i++) {
+    updateStyling(tableBody.rows[i]);
   }
 }
 
-// Call enableEditing function to initialize
-enableEditing();
+// Call updateStylingForExistingRows after adding rows
+updateStylingForExistingRows();
