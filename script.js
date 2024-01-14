@@ -26,10 +26,15 @@ function updateStyling(row) {
   var resultValue = row.cells[3].innerText.trim().toLowerCase(); // Convert to lowercase
 
   // Update row color based on the result value
-  if (resultValue === 'w') {
-    row.style.backgroundColor = '#c8e6c9'; // Green background for wins
-  } else if (resultValue === 'l') {
-    row.style.backgroundColor = '#ffcdd2'; // Red background for losses
+  if (resultValue === 'null' || resultValue === '') {
+    row.style.backgroundColor = '#f2f2f2'; // Default light grey background for null or empty results
+  } else {
+    // Update row color based on the result value
+    if (resultValue === 'w') {
+      row.style.backgroundColor = '#c8e6c9'; // Green background for wins
+    } else if (resultValue === 'l') {
+      row.style.backgroundColor = '#ffcdd2'; // Red background for losses
+    }
   }
     // Save data to localStorage
   saveTableData();
@@ -84,13 +89,30 @@ function loadTableData() {
       for (var j = 0; j < tableData[i].length; j++) {
         var newCell = newRow.insertCell(j);
         newCell.innerHTML = tableData[i][j];
+        newCell.contentEditable = true; // Make the cell editable
       }
 
       // Update styling for the loaded row
       updateStyling(newRow);
     }
+
+    // Enable editing after loading data
+    enableEditing();
   }
 }
 
+
+
 // Call loadTableData on page load
 loadTableData();
+
+// Function to clear all data
+function clearAllData() {
+  var tableBody = document.getElementById('tableBody');
+
+  // Clear table
+  tableBody.innerHTML = '';
+
+  // Clear localStorage
+  localStorage.removeItem('tableData');
+}
