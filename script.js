@@ -29,13 +29,13 @@ function updateStyling(row) {
 
   // Update row color based on the result value
   if (resultValue === 'null' || resultValue === '') {
-    row.style.backgroundColor = '#f2f2f2'; // Default light grey background for null or empty results
+    row.style.backgroundColor = '#103660'; // Default light grey background for null or empty results
   } else {
     // Update row color based on the result value
     if (resultValue === 'w') {
-      row.style.backgroundColor = '#c8e6c9'; // Green background for wins
+      row.style.backgroundColor = '#00e192'; // Green background for wins
     } else if (resultValue === 'l') {
-      row.style.backgroundColor = '#ffcdd2'; // Red background for losses
+      row.style.backgroundColor = '#fc5c65'; // Red background for losses
     }
   }
   
@@ -111,22 +111,28 @@ function loadTableData() {
 
       // Update styling for the loaded row
       updateStyling(newRow);
-    // Select only the 'tr' elements within 'tbody'
-const rows = Array.from(document.querySelectorAll('tr'));
+      const rows = Array.from(document.querySelectorAll('tr'));
 
-function slideOut(row) {
-  row.classList.add('slide-out');
-}
+      function slideOut(row) {
+        row.classList.add('slide-out');
+      }
+      
+      function slideIn(row, index) {
+        setTimeout(function() {
+          row.classList.remove('slide-out');
+        }, (index + 5) * 200);  
+      }
+      
+      rows.forEach(slideOut);
+      
+      rows.forEach(slideIn);
 
-function slideIn(row, index) {
-  setTimeout(function() {
-    row.classList.remove('slide-out');
-  }, (index + 5) * 200);
-}
 
-rows.forEach(slideOut);
 
-rows.forEach(slideIn);
+
+
+
+
     }
 
     // Enable editing after loading data

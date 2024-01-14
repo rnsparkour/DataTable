@@ -1,41 +1,76 @@
 /* Add this in styles.css */
+.content {
+  display: flex;
+flex-direction: column;
+align-content: center;
+justify-content: center;
+align-items: center;
+}
 
+
+.title{
+margin:0 auto;
+padding:0 auto;
+width:100%;
+font-size: 30px;
+color: #fff;
+text-transform: uppercase;
+font-weight: 300;
+text-align: center;
+background-color:#103660;
+border-bottom: 3px solid #00e192;
+}
+.tbl-content{
+
+margin-top: 0px;
+
+}
 table {
-  overflow: hidden;
-  background-color: #eee;
+
+overflow: hidden;
+background-color: #103660;
+table-layout: fixed;    
+width:100%;
+border-spacing:0;
 }
 
 th, td {
-  padding: 0.25em 0.5em;
-  text-align: left;
-  vertical-align: top;
+border: 1px solid #305d91;
+padding: 0.25em 0.5em;
+text-align: left;
+vertical-align: top;
+padding: 15px;
+text-align: left;
+vertical-align:middle;
+font-weight: 300;
+font-size: 12px;
+color: white;
+text-transform: uppercase;
 }
 
 th {
-  background-color: #009;
-  color: #fff;
-}
-
-tbody tr {
-  transition: all 1s ease-in-out;
-}
-
-tbody tr.slide-out {
-  transform: translateX(100%);
+padding: 20px 15px;
+text-align: left;
+font-weight: 500;
+font-size: 12px;
+color: #fff;
+text-transform: uppercase;
+background-color: #103660;
+color: white;
 }
 
 tr {
-  transition: all 1s ease-in-out;
+transition: all 1s ease-in-out;
 }
 
 tr.slide-out {
-  transform: translateX(100%);
+transform: translateX(100%);
 }
 
 .win-row {
-  background-color: #c8e6c9; /* Green background for wins */
+background-color: #27ae60; /* Green background for wins */
 }
 
 .loss-row {
-  background-color: #ffcdd2; /* Red background for losses */
+background-color: #e74c3c; /* Red background for losses */
 }
