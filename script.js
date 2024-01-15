@@ -35,10 +35,18 @@ function updateStyling(row) {
     if (resultValue === 'w') {
       row.style.backgroundColor = '#00e192'; // Green background for wins
     } else if (resultValue === 'l') {
-      row.style.backgroundColor = '#fc5c65'; // Red background for losses
+      row.style.backgroundColor = '#ff6666'; // Red background for losses
     }
   }
-  
+  // Update font color based on the result value
+  var cells = row.cells;
+  for (var i = 0; i < cells.length; i++) {
+    if (resultValue === 'null' || resultValue === '') {
+      cells[i].style.color = '#fff'; // Set text color to white for null or empty results
+    } else {
+      cells[i].style.color = '#606060'; // Set text color to black for other results
+    }
+  }
 
     // Save data to localStorage
   saveTableData();
