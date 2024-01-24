@@ -23,34 +23,31 @@ function saveTableData() {
   localStorage.setItem('tableData', JSON.stringify(tableData));
 }
 
-// Function to update the styling based on the result value
 function updateStyling(row) {
   var resultValue = row.cells[3].innerText.trim().toLowerCase(); // Convert to lowercase
 
-  // Update row color based on the result value
-  if (resultValue === 'null' || resultValue === '') {
-    row.style.backgroundColor = '#103660'; // Default light grey background for null or empty results
+  // Update background color based on the result value for the W/L column (index 3)
+  var wLCell = row.cells[3];
+  if (resultValue === 'w') {
+    wLCell.style.backgroundColor = '#00e192'; // Green background for wins in W/L column
+  } else if (resultValue === 'l') {
+    wLCell.style.backgroundColor = '#ff6666'; // Red background for losses in W/L column
   } else {
-    // Update row color based on the result value
-    if (resultValue === 'w') {
-      row.style.backgroundColor = '#00e192'; // Green background for wins
-    } else if (resultValue === 'l') {
-      row.style.backgroundColor = '#ff6666'; // Red background for losses
-    }
+    wLCell.style.backgroundColor = ''; // Reset background color for other results
   }
+
   // Update font color based on the result value
   var cells = row.cells;
   for (var i = 0; i < cells.length; i++) {
-    if (resultValue === 'null' || resultValue === '') {
-      cells[i].style.color = '#fff'; // Set text color to white for null or empty results
+    if (resultValue === 'w' || resultValue === 'l') {
+      cells[i].style.color = '#606060'; // Set text color to #606060 for 'w' or 'l'
     } else {
-      cells[i].style.color = '#606060'; // Set text color to black for other results
+      cells[i].style.color = '#fff'; // Set text color to white for other results
     }
   }
 
   // Save data to localStorage
   saveTableData();
-
 }
 
 // Function to add a new row to the table
@@ -87,10 +84,33 @@ function updateStylingForExistingRows() {
 
 // Call updateStylingForExistingRows after adding rows
 updateStylingForExistingRows();
+// Add a Function to Remove Row:
+function removeRow() {
+  var tableBody = document.getElementById('tableBody');
+  var lastRowIndex = tableBody.rows.length - 1;
+
+  if (lastRowIndex >= 0) {
+    tableBody.deleteRow(lastRowIndex);
+    saveTableData(); // Save data after removing a row
+  }
+}
+
+// ... (other functions and code)
+
+// Call removeRow when the "-" button is clicked
+function removeRow() {
+  var tableBody = document.getElementById('tableBody');
+  var lastRowIndex = tableBody.rows.length - 1;
+
+  if (lastRowIndex >= 0) {
+    tableBody.deleteRow(lastRowIndex);
+    saveTableData(); // Save data after removing a row
+  }
+}
+
 
 // Function to load data from localStorage
 function loadTableData() {
-
   var tableData = localStorage.getItem('tableData');
 
   if (tableData) {
@@ -103,58 +123,46 @@ function loadTableData() {
     for (var i = 0; i < tableData.length; i++) {
       var newRow = tableBody.insertRow(tableBody.rows.length);
 
-
-
       for (var j = 0; j < tableData[i].length; j++) {
         var newCell = newRow.insertCell(j);
         newCell.innerHTML = tableData[i][j];
         newCell.contentEditable = true; // Make the cell editable
       }
+
       // Enable focusout event listener for styling updates
       newRow.addEventListener('focusout', function () {
         // Update the styling based on the result value
         updateStyling(newRow);
-
       });
 
       // Update styling for the loaded row
       updateStyling(newRow);
-      const rows = Array.from(document.querySelectorAll('tr'));
-
-      function slideOut(row) {
-        row.classList.add('slide-out');
-      }
-
-      function slideIn(row, index) {
-        setTimeout(function () {
-
-          row.classList.add('slide-in');
-
-        }, (index + 5) * 100);
-      }
-
-      rows.forEach(slideOut);
-
-      rows.forEach(slideIn);
-
-
-
-
-
-
-
     }
+
+    const rows = Array.from(document.querySelectorAll('tr'));
+
+    function slideOut(row) {
+      row.classList.add('slide-out');
+    }
+
+    function slideIn(row, index) {
+      setTimeout(function () {
+        row.classList.add('slide-in');
+      }, (index + 5) * 100);
+    }
+
+    rows.forEach(slideOut);
+
+    rows.forEach(slideIn);
 
     // Enable editing after loading data
     enableEditing();
-
-
   }
 }
 
-
 // Call loadTableData on page load
 loadTableData();
+
 
 // Function to clear all data
 function clearAllData() {
