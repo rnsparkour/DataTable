@@ -77,9 +77,9 @@ th {
 
 
 th:nth-child(1), td:nth-child(1) { width: 40%; }
-th:nth-child(2), td:nth-child(2) { width: 25%; }
-th:nth-child(3), td:nth-child(3) { width: 20%; }
-th:nth-child(4), td:nth-child(4) { width: 15%; }
+th:nth-child(2), td:nth-child(2) { width: 30%; }
+th:nth-child(3), td:nth-child(3) { width: 25%; }
+th:nth-child(4), td:nth-child(4) { width: 5%; }
 
 td {
   white-space: normal; /* This will allow the text to wrap */
