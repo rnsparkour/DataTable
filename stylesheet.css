@@ -37,7 +37,7 @@ width: 12rem;
 }
 
 table {
-  width: 100%; /* Specify a width for the table */
+  width: 50%; /* Specify a width for the table */
   table-layout: fixed; /* Use fixed layout for the table */
   border-radius: 30px;
   overflow: hidden;
@@ -76,10 +76,10 @@ th {
 }
 
 
-th:nth-child(1), td:nth-child(1) { width: 50%; }
-th:nth-child(2), td:nth-child(2) { width: 35%; }
-th:nth-child(3), td:nth-child(3) { width: 10%; }
-th:nth-child(4), td:nth-child(4) { width: 5%; }
+th:nth-child(1), td:nth-child(1) { width: 40%; }
+th:nth-child(2), td:nth-child(2) { width: 25%; }
+th:nth-child(3), td:nth-child(3) { width: 20%; }
+th:nth-child(4), td:nth-child(4) { width: 15%; }
 
 td {
   white-space: normal; /* This will allow the text to wrap */
