@@ -37,11 +37,13 @@ width: 12rem;
 }
 
 table {
+  width: 100%; /* Specify a width for the table */
+  table-layout: fixed; /* Use fixed layout for the table */
   border-radius: 30px;
   overflow: hidden;
   background-color: #103660;
-
-  border-spacing: 0;
+ border-spacing: 0;
+  border-collapse: collapse; /* Add this to ensure that the border spacing doesn't affect the layout */
 }
 
 th,
@@ -58,6 +60,8 @@ td {
   font-weight: bold;
   line-height: 1.2;
   text-transform: uppercase;
+
+  
 }
 
 th {
@@ -72,25 +76,16 @@ th {
 }
 
 
-th:nth-child(1) { /* ΟΜΑΔΕΣ column */
-  width: 50%;
-}
-
-th:nth-child(2) { /* ΠΡΟΓΝΩΣΤΙΚΟ column */
-  width: 35%;
-}
-
-th:nth-child(3) { /* ΑΠΟΔΟΣΗ column */
-  width: 10%;
-}
-
-th:nth-child(4) { /* W/L column */
-  width: 5%;
-}
+th:nth-child(1), td:nth-child(1) { width: 50%; }
+th:nth-child(2), td:nth-child(2) { width: 35%; }
+th:nth-child(3), td:nth-child(3) { width: 10%; }
+th:nth-child(4), td:nth-child(4) { width: 5%; }
 
 td {
-  word-wrap: break-word; /* This will ensure that text wraps within the cell */
+  white-space: normal; /* This will allow the text to wrap */
+  word-wrap: break-word; /* This will break the word at the end of the line */
 }
+
 tr {
   transition: all 1s ease-in-out;
 }
