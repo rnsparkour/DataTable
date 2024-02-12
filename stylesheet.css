@@ -71,6 +71,26 @@ th {
   color: white;
 }
 
+
+th:nth-child(1) { /* ΟΜΑΔΕΣ column */
+  width: 50%;
+}
+
+th:nth-child(2) { /* ΠΡΟΓΝΩΣΤΙΚΟ column */
+  width: 35%;
+}
+
+th:nth-child(3) { /* ΑΠΟΔΟΣΗ column */
+  width: 10%;
+}
+
+th:nth-child(4) { /* W/L column */
+  width: 5%;
+}
+
+td {
+  word-wrap: break-word; /* This will ensure that text wraps within the cell */
+}
 tr {
   transition: all 1s ease-in-out;
 }
