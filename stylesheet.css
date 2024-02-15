@@ -91,7 +91,7 @@ tr {
 }
 
 
-tr.slide-out {
+/* tr.slide-out {
   position: relative;
   left: 100%;
 
@@ -99,7 +99,7 @@ tr.slide-out {
 
 tr.slide-in {
   transform: translateX(-100%);
-}
+} */
 
 .win-row {
   background-color: #27ae60;
