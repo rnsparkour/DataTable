@@ -40,7 +40,7 @@ function updateStyling(row) {
     // Update font color based on the result value
     cells[i].style.color = (resultValue === 'w' || resultValue === 'l') ? '#606060' : '#fff'; // Set text color based on cell content
   }
-
+reorderRowsBasedOnWL()
   // Save data to localStorage
   saveTableData();
 }
@@ -81,7 +81,7 @@ function updateStylingForExistingRows() {
   // Loop through existing rows and update styling
   for (var i = 0; i < tableBody.rows.length; i++) {
     updateStyling(tableBody.rows[i]);
-    
+    reorderRowsBasedOnWL()
 
   }
 
@@ -133,6 +133,7 @@ function loadTableData() {
         newCell.addEventListener('input', createInputListener(newRow));
       }
       updateStyling(newRow); // Immediately apply styling based on loaded data
+      reorderRowsBasedOnWL()
     }
   }
 }
@@ -160,3 +161,9 @@ function clearAllData() {
   localStorage.removeItem('tableData');
    reorderRowsBasedOnWL();
 }
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    // Assume you have a function to populate the table
+    populateTableWithData(); // This populates the table
+    reorderRowsBasedOnWL(); // Then reorder rows based on W or L
+});
