@@ -22,7 +22,31 @@ function saveTableData() {
   // Save data to localStorage
   localStorage.setItem('tableData', JSON.stringify(tableData));
 }
+function removeEmptyRows() {
+  const tableBody = document.getElementById('tableBody');
+  const rows = tableBody.rows;
 
+  // Use a reverse loop since we'll be removing rows from the collection
+  for (let i = rows.length - 1; i >= 0; i--) {
+    const row = rows[i];
+    let isEmpty = true;
+
+    // Check each cell in the row
+    for (let j = 0; j < row.cells.length; j++) {
+      const cell = row.cells[j];
+      if (cell.textContent.trim() !== "") {
+        // If any cell is not empty, mark row as not empty and break the loop
+        isEmpty = false;
+        break;
+      }
+    }
+
+    // If the row is empty, remove it
+    if (isEmpty) {
+      tableBody.deleteRow(i);
+    }
+  }
+}
 function updateStyling(row) {
   var cells = row.cells;
   for (var i = 0; i < cells.length; i++) {
