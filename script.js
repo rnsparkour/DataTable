@@ -44,17 +44,33 @@ function updateStyling(row) {
   // Save data to localStorage
   saveTableData();
 }
+function reorderRowsBasedOnWL() {
+  const tableBody = document.getElementById('tableBody');
+  const rows = Array.from(tableBody.rows);
 
+  // Assuming "W" or "L" is in the fourth column, index 3
+  const rowsToMove = rows.filter(row => {
+    const cellValue = row.cells[3].textContent.trim().toUpperCase();
+    return cellValue === 'W' || cellValue === 'L';
+  });
+
+  // Move matching rows to the end
+  rowsToMove.forEach(row => {
+    tableBody.appendChild(row); // This moves the row to the end of the table
+  });
+}
 // Function to add a new row to the table
 function addRow() {
   var tableBody = document.getElementById('tableBody');
   var newRow = tableBody.insertRow(-1); // Add a new row at the end of the table
+
 
   for (let i = 0; i < 4; i++) {
     var newCell = newRow.insertCell(i);
     newCell.contentEditable = true; // Make the cell editable
     newCell.addEventListener('input', function() {
       updateStyling(newRow);
+       reorderRowsBasedOnWL();
     });
   }
 }
@@ -65,6 +81,7 @@ function updateStylingForExistingRows() {
   // Loop through existing rows and update styling
   for (var i = 0; i < tableBody.rows.length; i++) {
     updateStyling(tableBody.rows[i]);
+    
 
   }
 
@@ -93,6 +110,7 @@ function removeRow() {
   if (lastRowIndex >= 0) {
     tableBody.deleteRow(lastRowIndex);
     saveTableData(); // Save data after removing a row
+     reorderRowsBasedOnWL();
   }
 }
 
@@ -140,4 +158,5 @@ function clearAllData() {
 
   // Clear localStorage
   localStorage.removeItem('tableData');
+   reorderRowsBasedOnWL();
 }
